@@ -6,7 +6,6 @@ import Couple from "./components/Couple.jsx";
 import Countdown from "./components/Countdown.jsx";
 import Events from "./components/Events.jsx";
 import WeddingActions from "./components/WeddingActions.jsx";
-import RSVP from "./components/RSVP.jsx";
 import Gallery from "./components/Gallery.jsx";
 import Contacts from "./components/Contacts.jsx";
 import Footer from "./components/Footer.jsx";
@@ -27,8 +26,7 @@ export default function App() {
   const t = content[lang];
   const changeLanguage = () => {
     localStorage.removeItem("wedding-language");
-    setLang(null);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.reload();
   };
 
   return (
@@ -42,7 +40,6 @@ export default function App() {
         <Events t={t} />
         <WeddingActions t={t} />
         <Gallery t={t} />
-        <RSVP t={t} />
         <Contacts t={t} />
         <Footer t={t} />
       </main>

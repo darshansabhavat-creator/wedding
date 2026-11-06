@@ -73,7 +73,7 @@ export default function OpeningBook({ children }) {
         <span className="divine-om">ॐ</span>
         <div className="deity-aura" />
         <div className="venkateswara-frame">
-          <img src="/img/venkateswara.webp" alt="Lord Venkateswara" onError={(event) => event.currentTarget.classList.add("deity-image-missing")} />
+          <img src="/img/placeholder.svg" alt="Lord Venkateswara" onError={(event) => event.currentTarget.classList.add("deity-image-missing")} />
           <div className="deity-placeholder" aria-hidden="true"><span>ॐ</span></div>
         </div>
         <div className="deity-caption"><strong>ಶ್ರೀ ವೆಂಕಟೇಶ್ವರ ಸ್ವಾಮಿ</strong><small>Om Namo Venkatesaya</small></div>

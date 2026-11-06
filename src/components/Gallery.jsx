@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 export default function Gallery({ t }) {
   const photos = [
-    { src: "/img/gallery-1.webp", alt: t.galleryPhoto1 },
-    { src: "/img/gallery-2.webp", alt: t.galleryPhoto2 },
-    { src: "/img/gallery-3.webp", alt: t.galleryPhoto3 },
-    { src: "/img/gallery-4.webp", alt: t.galleryPhoto4 },
+    { src: "/img/placeholder.svg", alt: t.galleryPhoto1 },
+    { src: "/img/placeholder.svg", alt: t.galleryPhoto2 },
+    { src: "/img/placeholder.svg", alt: t.galleryPhoto3 },
+    { src: "/img/placeholder.svg", alt: t.galleryPhoto4 },
   ];
   const [selected, setSelected] = useState(null);
   useEffect(() => {

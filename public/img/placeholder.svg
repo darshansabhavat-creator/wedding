@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-labelledby="title description">
+  <title id="title">Photo coming soon</title>
+  <desc id="description">A decorative placeholder in warm wedding colors</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8efdf"/>
+      <stop offset="1" stop-color="#e7cda5"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#fffaf0" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#fffaf0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="1200" fill="url(#background)"/>
+  <circle cx="450" cy="480" r="330" fill="url(#glow)"/>
+  <rect x="36" y="36" width="828" height="1128" rx="28" fill="none" stroke="#9d6d42" stroke-opacity=".38" stroke-width="3"/>
+  <g fill="none" stroke="#8b2945" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" opacity=".72">
+    <path d="M450 360c-70-100-170-20-95 55-95-75-155 25-35 70-110 45-60 150 35 90-60 105 45 155 95 50 50 105 155 55 95-50 95 60 145-45 35-90 120-45 60-145-35-70 75-75-25-155-95-55Z"/>
+    <circle cx="450" cy="485" r="42"/>
+    <path d="M450 290v-70m0 460v-70m-195-125h-70m530 0h-70M312 347l-50-50m376 376-50-50m0-276 50-50m-376 376 50-50"/>
+  </g>
+  <text x="450" y="850" fill="#76243b" font-family="Georgia,serif" font-size="46" text-anchor="middle" letter-spacing="3">PHOTO COMING SOON</text>
+  <text x="450" y="910" fill="#805d43" font-family="Georgia,serif" font-size="28" text-anchor="middle">Wedding memories will be here</text>
+</svg>

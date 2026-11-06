@@ -44,6 +44,7 @@ export default function OpeningBook({ children }) {
     setSelected(language);
 
     window.setTimeout(() => {
+      stopOmSound();
       localStorage.setItem("wedding-language", language);
       document.body.classList.remove("book-open-lock");
       window.dispatchEvent(new CustomEvent("wedding-language-selected", { detail: language }));

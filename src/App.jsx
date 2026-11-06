@@ -9,7 +9,6 @@ import WeddingActions from "./components/WeddingActions.jsx";
 import Gallery from "./components/Gallery.jsx";
 import Contacts from "./components/Contacts.jsx";
 import Footer from "./components/Footer.jsx";
-import MusicPlayer from "./components/MusicPlayer.jsx";
 
 export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem("wedding-language") || null);
@@ -36,19 +35,16 @@ export default function App() {
   };
 
   return (
-    <>
-      <MusicPlayer t={t} />
-      <main className="invitation" lang={lang === "kn" ? "kn" : "en"}>
-        <button className="back" onClick={changeLanguage} aria-label={t.back}>← {t.back}</button>
-        <Hero t={t} />
-        <Couple t={t} />
-        <Countdown t={t} />
-        <Events t={t} />
-        <WeddingActions t={t} />
-        <Gallery t={t} />
-        <Contacts t={t} />
-        <Footer t={t} />
-      </main>
-    </>
+    <main className="invitation" lang={lang === "kn" ? "kn" : "en"}>
+      <button className="back" onClick={changeLanguage} aria-label={t.back}>← {t.back}</button>
+      <Hero t={t} />
+      <Couple t={t} />
+      <Countdown t={t} />
+      <Events t={t} />
+      <WeddingActions t={t} />
+      <Gallery t={t} />
+      <Contacts t={t} />
+      <Footer t={t} />
+    </main>
   );
 }

@@ -272,6 +272,7 @@ img { display: block; max-width: 100%; }
 .flower-garland i { width: 50px; height: 50px; margin-top: -15px; border-radius: 50%; background: radial-gradient(circle,#fff5be 0 18%,#f0a45e 19% 45%,#fff9dd 46% 58%,transparent 60%); filter: drop-shadow(0 7px 8px rgba(58,10,18,.25)); animation: garlandSway 4s ease-in-out infinite alternate; }
 .flower-garland i:nth-child(even) { animation-delay: -2s; }
 .language-books { position: relative; z-index: 10; width: 100%; min-width: 0; height: 100%; padding: 34px 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.language-books::before { content: ""; position: absolute; z-index: -1; width: min(590px,90%); height: min(510px,78%); border: 1px solid rgba(255,221,157,.12); border-radius: 48% 48% 38% 38%; background: radial-gradient(ellipse at center,rgba(255,223,174,.1),rgba(67,14,30,.05) 58%,transparent 72%); box-shadow: 0 0 100px rgba(255,203,127,.08); pointer-events: none; }
 .language-instruction { margin: 0 0 28px; text-align: center; }
 .language-instruction span,.language-instruction b { display: block; }
 .language-instruction span { color: #fff5e0; font-family: "Cormorant Garamond",serif; font-size: clamp(25px,3vw,38px); }
@@ -288,7 +289,8 @@ img { display: block; max-width: 100%; }
 .book-cover-face strong { font-family: "Cormorant Garamond","Noto Sans Kannada",serif; font-size: clamp(24px,3vw,34px); }
 .book-cover-face small { margin-top: 7px; font-size: 10px; letter-spacing: .05em; }
 .book-cover-face b { position: absolute; bottom: 27px; border-bottom: 1px solid rgba(255,255,255,.55); padding-bottom: 3px; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
-.invitation-book:hover .book-cover-face { transform: rotateY(-12deg); }
+.invitation-book:hover .book-cover-face,.invitation-book:focus-visible .book-cover-face { transform: rotateY(-12deg); }
+.invitation-book:active .book-cover-face { transform: rotateY(-24deg); }
 .om-toggle { position: absolute; z-index: 20; right: 20px; bottom: 20px; min-height: 44px; border: 1px solid rgba(255,226,165,.42); border-radius: 999px; padding: 5px 13px 5px 7px; background: rgba(48,9,19,.58); color: #ffe5a7; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .om-toggle span { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,220,149,.12); display: grid; place-items: center; font-family: "Noto Sans Kannada",serif; font-size: 19px; }
 .om-toggle small { font-size: 9px; }
@@ -305,7 +307,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 680px) {
   .divine-opening { grid-template-columns: minmax(0,1fr); grid-template-rows: 44svh 56svh; align-items: stretch; }
   .divine-deity { height: 44svh; padding: 30px 12px 18px; }
-  .venkateswara-frame { width: min(220px,52vw); height: min(310px,35svh); }
+  .venkateswara-frame { width: min(220px,52vw); height: min(285px,32svh); }
   .divine-om { top: 1.5%; font-size: 38px; }
   .deity-caption { bottom: 3%; }
   .deity-caption strong { font-size: 13px; }
@@ -327,7 +329,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 380px) {
   .divine-opening { grid-template-rows: 42svh 58svh; }
   .divine-deity { height: 42svh; }
-  .venkateswara-frame { width: min(190px,50vw); height: min(280px,32svh); }
+  .venkateswara-frame { width: min(190px,50vw); height: min(265px,29svh); }
   .invitation-book { height: min(165px,22svh); }
   .language-instruction span { font-size: 17px; }
 }

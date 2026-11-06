@@ -4,11 +4,21 @@ import App from "./App.jsx";
 import OpeningBook from "./components/OpeningBook.jsx";
 import "./styles.css";
 
-createRoot(document.getElementById("root")).render(
-  <OpeningBook>
-    <App />
-  </OpeningBook>
-);
+function WeddingSite() {
+  return (
+    <>
+      <audio id="wedding-audio" loop autoPlay preload="auto">
+        <source src="/audio/om-namo.mp3" type="audio/mpeg" />
+        <source src="/audio/om%20namo.aac" type="audio/aac" />
+      </audio>
+      <OpeningBook>
+        <App />
+      </OpeningBook>
+    </>
+  );
+}
+
+createRoot(document.getElementById("root")).render(<WeddingSite />);
 
 const observer = new IntersectionObserver(
   (entries) => {

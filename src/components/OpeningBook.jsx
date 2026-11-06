@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const petals = Array.from({ length: 20 }, (_, index) => index);
 
@@ -6,20 +6,24 @@ export default function OpeningBook({ children }) {
   const [open, setOpen] = useState(true);
   const [selected, setSelected] = useState(null);
   const [soundPlaying, setSoundPlaying] = useState(false);
-  const audioRef = useRef(null);
-
   useEffect(() => {
     if (!open) return;
     document.body.classList.add("book-open-lock");
+    const audio = document.getElementById("wedding-audio");
+    if (audio) {
+      audio.volume = 0.55;
+      audio.play().then(() => setSoundPlaying(true)).catch(() => setSoundPlaying(false));
+    }
     return () => document.body.classList.remove("book-open-lock");
   }, [open]);
 
   const startOmSound = async () => {
     if (soundPlaying) return;
-    if (!audioRef.current) return;
+    const audio = document.getElementById("wedding-audio");
+    if (!audio) return;
     try {
-      audioRef.current.volume = 0.55;
-      await audioRef.current.play();
+      audio.volume = 0.55;
+      await audio.play();
       setSoundPlaying(true);
     } catch {
       setSoundPlaying(false);
@@ -27,9 +31,10 @@ export default function OpeningBook({ children }) {
   };
 
   const stopOmSound = () => {
-    if (!audioRef.current) return;
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
+    const audio = document.getElementById("wedding-audio");
+    if (!audio) return;
+    audio.pause();
+    audio.currentTime = 0;
     setSoundPlaying(false);
   };
 
@@ -43,8 +48,7 @@ export default function OpeningBook({ children }) {
       document.body.classList.remove("book-open-lock");
       window.dispatchEvent(new CustomEvent("wedding-language-selected", { detail: language }));
       setOpen(false);
-      stopOmSound();
-    }, 2200);
+    }, 2500);
   };
 
   if (!open) return children;
@@ -52,11 +56,7 @@ export default function OpeningBook({ children }) {
   const isKannada = selected === "kn";
 
   return (
-    <div className={`divine-opening ${selected ? "is-opening" : ""}`}>
-      <audio ref={audioRef} loop preload="none" onError={() => setSoundPlaying(false)}>
-        <source src="/audio/om-namo.mp3" type="audio/mpeg" />
-        <source src="/audio/om%20namo.aac" type="audio/aac" />
-      </audio>
+    <div className={`divine-opening ${selected ? `is-opening language-${selected}` : ""}`}>
       <div className="flower-rain" aria-hidden="true">
         {petals.map((petal) => <span key={petal} style={{ "--i": petal }} />)}
       </div>
@@ -70,6 +70,11 @@ export default function OpeningBook({ children }) {
         <div className="venkateswara-frame">
           <img src="/img/venkateswara.webp" alt="Lord Venkateswara" onError={(event) => event.currentTarget.classList.add("deity-image-missing")} />
           <div className="deity-placeholder" aria-hidden="true"><span>ॐ</span></div>
+          <div className="flower-shower" aria-hidden="true">
+            {Array.from({ length: 18 }, (_, petal) => (
+              <span key={petal} style={{ "--i": petal, "--x": `${(petal * 37) % 100}%` }} />
+            ))}
+          </div>
         </div>
         <div className="deity-caption"><strong>ಶ್ರೀ ವೆಂಕಟೇಶ್ವರ ಸ್ವಾಮಿ</strong><small>Om Namo Venkatesaya</small></div>
       </div>

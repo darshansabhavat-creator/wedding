@@ -7,6 +7,8 @@ export default function OpeningBook({ children }) {
   const [selected, setSelected] = useState(null);
   const [soundPlaying, setSoundPlaying] = useState(false);
   const audioRef = useRef(null);
+  const masterRef = useRef(null);
+  const oscillatorsRef = useRef([]);
 
   useEffect(() => {
     if (!open) return;
@@ -27,6 +29,7 @@ export default function OpeningBook({ children }) {
       master.gain.setValueAtTime(0.0001, context.currentTime);
       master.gain.exponentialRampToValueAtTime(0.045, context.currentTime + 1);
       master.connect(context.destination);
+      masterRef.current = master;
 
       [136.1, 204.15, 272.2].forEach((frequency, index) => {
         const oscillator = context.createOscillator();
@@ -37,11 +40,23 @@ export default function OpeningBook({ children }) {
         oscillator.connect(gain);
         gain.connect(master);
         oscillator.start();
+        oscillatorsRef.current.push(oscillator);
       });
       setSoundPlaying(true);
     } catch {
       setSoundPlaying(false);
     }
+  };
+
+  const stopOmSound = () => {
+    const context = audioRef.current;
+    if (!context || !masterRef.current) return;
+    masterRef.current.gain.cancelScheduledValues(context.currentTime);
+    masterRef.current.gain.setTargetAtTime(0.0001, context.currentTime, 0.18);
+    oscillatorsRef.current.forEach((oscillator) => oscillator.stop(context.currentTime + 0.8));
+    oscillatorsRef.current = [];
+    masterRef.current = null;
+    setSoundPlaying(false);
   };
 
   const openLanguage = (language) => {
@@ -52,7 +67,9 @@ export default function OpeningBook({ children }) {
     window.setTimeout(() => {
       localStorage.setItem("wedding-language", language);
       document.body.classList.remove("book-open-lock");
-      window.location.reload();
+      window.dispatchEvent(new CustomEvent("wedding-language-selected", { detail: language }));
+      setOpen(false);
+      stopOmSound();
     }, 2200);
   };
 
@@ -73,7 +90,7 @@ export default function OpeningBook({ children }) {
         <span className="divine-om">ॐ</span>
         <div className="deity-aura" />
         <div className="venkateswara-frame">
-          <img src="/img/placeholder.svg" alt="Lord Venkateswara" onError={(event) => event.currentTarget.classList.add("deity-image-missing")} />
+          <img src="/img/venkateswara-temp.svg" alt="Temporary devotional illustration of Lord Venkateswara" onError={(event) => event.currentTarget.classList.add("deity-image-missing")} />
           <div className="deity-placeholder" aria-hidden="true"><span>ॐ</span></div>
         </div>
         <div className="deity-caption"><strong>ಶ್ರೀ ವೆಂಕಟೇಶ್ವರ ಸ್ವಾಮಿ</strong><small>Om Namo Venkatesaya</small></div>
@@ -91,7 +108,7 @@ export default function OpeningBook({ children }) {
         </div>
       </div>
 
-      <button type="button" className={`om-toggle ${soundPlaying ? "sound-on" : ""}`} onClick={startOmSound} aria-label="Play Om ambience">
+      <button type="button" className={`om-toggle ${soundPlaying ? "sound-on" : ""}`} onClick={soundPlaying ? stopOmSound : startOmSound} aria-label={soundPlaying ? "Stop Om ambience" : "Play Om ambience"}>
         <span>ॐ</span><small>{soundPlaying ? "Om Playing" : "Play Om"}</small>
       </button>
 

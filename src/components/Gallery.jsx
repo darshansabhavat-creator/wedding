@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 export default function Gallery({ t }) {
   const photos = [
-    { src: "/img/placeholder.svg", alt: t.galleryPhoto1 },
-    { src: "/img/placeholder.svg", alt: t.galleryPhoto2 },
-    { src: "/img/placeholder.svg", alt: t.galleryPhoto3 },
-    { src: "/img/placeholder.svg", alt: t.galleryPhoto4 },
+    { src: "/img/couple-temp.svg", alt: t.galleryPhoto1 },
+    { src: "/img/haldi-temp.svg", alt: t.galleryPhoto2 },
+    { src: "/img/wedding-temp.svg", alt: t.galleryPhoto3 },
+    { src: "/img/reception-temp.svg", alt: t.galleryPhoto4 },
   ];
   const [selected, setSelected] = useState(null);
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Gallery({ t }) {
       <div className="section-heading"><span>06</span><p>{t.galleryEyebrow}</p><h2>{t.galleryTitle}</h2></div>
       <div className="gallery-grid">
         {photos.map((photo, index) => (
-          <button key={photo.src} className={`gallery-item gallery-item-${index + 1}`} onClick={() => setSelected(photo)} aria-label={photo.alt}>
+          <button key={photo.alt} className={`gallery-item gallery-item-${index + 1}`} onClick={() => setSelected(photo)} aria-label={photo.alt}>
             <img src={photo.src} alt={photo.alt} loading="lazy" onError={(event) => event.currentTarget.parentElement?.classList.add("gallery-placeholder")} />
             <span>⌕</span>
           </button>

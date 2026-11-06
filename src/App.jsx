@@ -21,6 +21,12 @@ export default function App() {
     }
   }, [lang]);
 
+  useEffect(() => {
+    const handleLanguageSelection = (event) => setLang(event.detail);
+    window.addEventListener("wedding-language-selected", handleLanguageSelection);
+    return () => window.removeEventListener("wedding-language-selected", handleLanguageSelection);
+  }, []);
+
   if (!lang) return <LanguageSelect languages={languages} onSelect={setLang} />;
 
   const t = content[lang];

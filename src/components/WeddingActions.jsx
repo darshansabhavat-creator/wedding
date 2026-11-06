@@ -1,15 +1,23 @@
 import { WEDDING_DATE } from "../data.js";
 
+const calendarDate = (date) => date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+const escapeIcsText = (value) => String(value).replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;");
+
 export default function WeddingActions({ t }) {
-  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`${t.groom.name} & ${t.bride.name} Wedding`)}&dates=20261124T062800Z/20261124T102800Z&details=${encodeURIComponent(t.invite)}&location=${encodeURIComponent(t.events[1]?.venue || "")}`;
+  const start = new Date(WEDDING_DATE);
+  const end = new Date(start.getTime() + 4 * 60 * 60 * 1000);
+  const eventTitle = `${t.groom.name} & ${t.bride.name} Wedding`;
+  const location = t.events[1]?.venue || "";
+  const calendarDates = `${calendarDate(start)}/${calendarDate(end)}`;
+  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${calendarDates}&details=${encodeURIComponent(t.invite)}&location=${encodeURIComponent(location)}`;
 
   const downloadCalendar = () => {
     const ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT",
-      "DTSTART:20261124T062800Z", "DTEND:20261124T102800Z",
-      `SUMMARY:${t.groom.name} & ${t.bride.name} Wedding`,
-      `DESCRIPTION:${t.invite}`,
-      `LOCATION:${t.events[1]?.venue || ""}`,
+      `DTSTART:${calendarDate(start)}`, `DTEND:${calendarDate(end)}`,
+      `SUMMARY:${escapeIcsText(eventTitle)}`,
+      `DESCRIPTION:${escapeIcsText(t.invite)}`,
+      `LOCATION:${escapeIcsText(location)}`,
       "END:VEVENT", "END:VCALENDAR",
     ].join("\r\n");
     const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
@@ -17,7 +25,7 @@ export default function WeddingActions({ t }) {
     link.href = url;
     link.download = "wedding.ics";
     link.click();
-    URL.revokeObjectURL(url);
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
   const share = async () => {

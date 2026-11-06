@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 const petals = Array.from({ length: 24 }, (_, index) => index);
 
 export default function OpeningBook({ children }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(() => !localStorage.getItem("wedding-language"));
   const [selected, setSelected] = useState(null);
   const [soundPlaying, setSoundPlaying] = useState(false);
   const audioRef = useRef(null);

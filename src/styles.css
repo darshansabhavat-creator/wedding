@@ -187,6 +187,30 @@ img { display: block; max-width: 100%; }
 .language-selected .english-book .book-cover-face { animation:bookOpenLeft 1.35s cubic-bezier(.65,.05,.25,1) forwards; }.language-selected .kannada-book .book-cover-face { animation:bookOpenRight 1.35s cubic-bezier(.65,.05,.25,1) forwards; }.language-selected-en .kannada-book,.language-selected-kn .english-book { opacity:0; transform:scale(.82) translateY(30px); transition:opacity .45s ease,transform .45s ease; }.language-selected .language-instruction { opacity:0; transition:.3s ease; }
 .om-toggle { position:absolute; z-index:20; right:18px; bottom:18px; width:auto; min-height:42px; border:1px solid rgba(255,226,165,.42); border-radius:999px; padding:5px 12px 5px 7px; background:rgba(48,9,19,.58); color:#ffe5a7; backdrop-filter:blur(10px); display:flex; align-items:center; gap:7px; }.om-toggle span { width:32px; height:32px; border-radius:50%; background:rgba(255,220,149,.12); display:grid; place-items:center; font-family:"Noto Sans Kannada",serif; font-size:19px; }.om-toggle small { font-size:9px; }.om-toggle.sound-on { box-shadow:0 0 22px rgba(255,220,149,.28); }
 @keyframes flowerFall{0%{transform:translateY(-40px) rotate(0deg);opacity:0}12%{opacity:.85}100%{transform:translateY(110svh) rotate(540deg) translateX(35px);opacity:.15}}@keyframes garlandSway{to{transform:translateY(12px) rotate(8deg)}}@keyframes omGlow{50%{transform:scale(1.08);text-shadow:0 0 38px rgba(255,226,165,.95)}}@keyframes auraPulse{50%{transform:scale(1.08);opacity:.85}}@keyframes bookOpenLeft{to{transform:rotateY(-155deg);filter:brightness(.85)}}@keyframes bookOpenRight{to{transform:rotateY(-155deg);filter:brightness(.85)}}
-@media(max-width:680px){.divine-opening{grid-template-columns:1fr;grid-template-rows:minmax(330px,54svh) auto;overflow-y:auto}.divine-deity{height:54svh;padding-top:40px}.venkateswara-frame{width:min(260px,54vw);height:min(390px,46svh)}.divine-om{top:3%;font-size:42px}.divine-deity>p{bottom:27px}.divine-deity>small{bottom:12px}.language-books{height:auto;padding:18px 12px 76px}.language-instruction{margin-bottom:14px}.language-instruction span{font-size:20px}.books-row{gap:14px}.invitation-book{width:min(135px,38vw);height:min(190px,27svh)}.book-cover-face strong{font-size:23px}.om-toggle{bottom:12px}.flower-garland{top:-38px}}
-@media(max-width:380px){.divine-opening{grid-template-rows:46svh auto}.divine-deity{height:46svh}.venkateswara-frame{height:38svh}.divine-deity>p{display:none}.divine-deity>small{bottom:5px}.language-instruction b{font-size:12px}.invitation-book{height:145px}}
+@media(max-width:680px){
+  .divine-opening{grid-template-columns:1fr;grid-template-rows:42svh 58svh;overflow:hidden}
+  .divine-deity{height:42svh;padding-top:22px}
+  .venkateswara-frame{width:min(210px,48vw);height:min(300px,34svh)}
+  .divine-om{top:2%;font-size:38px}
+  .divine-deity>p{bottom:18px;font-size:13px}
+  .divine-deity>small{bottom:5px;font-size:7px}
+  .language-books{height:58svh;padding:8px 10px 70px}
+  .language-instruction{margin:0 0 12px}
+  .language-instruction span{font-size:18px}
+  .language-instruction b{margin-top:4px;font-size:11px}
+  .books-row{gap:10px}
+  .invitation-book{width:min(125px,36vw);height:min(175px,23svh)}
+  .book-cover-face strong{font-size:20px}
+  .book-cover-face small{font-size:8px}
+  .book-cover-face i{top:17px}
+  .book-cover-face b{bottom:18px}
+  .flower-garland{top:-38px}
+  .om-toggle{bottom:8px}
+}
+@media(max-width:380px){
+  .divine-opening{grid-template-rows:40svh 60svh}
+  .venkateswara-frame{height:min(280px,32svh)}
+  .invitation-book{height:145px}
+  .language-instruction span{font-size:16px}
+}
 @media(prefers-reduced-motion:reduce){.flower-rain span,.flower-garland i,.divine-om,.deity-aura{animation:none!important}.invitation-book,.book-cover-face{transition:none!important}}

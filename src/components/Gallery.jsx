@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 export default function Gallery({ t }) {
   const photos = [
-    { src: "/img/couple-temp.svg", alt: t.galleryPhoto1 },
-    { src: "/img/haldi-temp.svg", alt: t.galleryPhoto2 },
-    { src: "/img/wedding-temp.svg", alt: t.galleryPhoto3 },
-    { src: "/img/reception-temp.svg", alt: t.galleryPhoto4 },
+    { src: "/img/couple.jpg", alt: t.galleryPhoto1 },
+    { src: "/img/haldi.jpg", alt: t.galleryPhoto2 },
+    { src: "/img/muhurat.jpg", alt: t.galleryPhoto3 },
+    { src: "/img/reception.jpg", alt: t.galleryPhoto4 },
   ];
   const [selected, setSelected] = useState(null);
   useEffect(() => {

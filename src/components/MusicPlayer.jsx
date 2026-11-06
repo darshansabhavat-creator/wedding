@@ -14,7 +14,10 @@ export default function MusicPlayer({ t }) {
   };
   return (
     <>
-      <audio ref={audioRef} loop preload="none" src="/audio/wedding.mp3" onError={() => setAvailable(false)} />
+      <audio ref={audioRef} loop preload="none" onError={() => setAvailable(false)}>
+        <source src="/audio/om-namo.mp3" type="audio/mpeg" />
+        <source src="/audio/om%20namo.aac" type="audio/aac" />
+      </audio>
       {available && <button className={`music-player ${playing ? "playing" : ""}`} onClick={toggle} aria-label={playing ? t.pauseMusic : t.playMusic}><span>{playing ? "Ⅱ" : "♪"}</span><i>{playing ? t.musicPlaying : t.playMusic}</i></button>}
     </>
   );

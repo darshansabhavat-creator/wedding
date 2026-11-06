@@ -7,8 +7,6 @@ export default function OpeningBook({ children }) {
   const [selected, setSelected] = useState(null);
   const [soundPlaying, setSoundPlaying] = useState(false);
   const audioRef = useRef(null);
-  const masterRef = useRef(null);
-  const oscillatorsRef = useRef([]);
 
   useEffect(() => {
     if (!open) return;
@@ -16,32 +14,12 @@ export default function OpeningBook({ children }) {
     return () => document.body.classList.remove("book-open-lock");
   }, [open]);
 
-  const startOmSound = () => {
+  const startOmSound = async () => {
     if (soundPlaying) return;
+    if (!audioRef.current) return;
     try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      const context = audioRef.current || new AudioContext();
-      audioRef.current = context;
-      if (context.state === "suspended") context.resume();
-
-      const master = context.createGain();
-      master.gain.setValueAtTime(0.0001, context.currentTime);
-      master.gain.exponentialRampToValueAtTime(0.045, context.currentTime + 1);
-      master.connect(context.destination);
-      masterRef.current = master;
-
-      [136.1, 204.15, 272.2].forEach((frequency, index) => {
-        const oscillator = context.createOscillator();
-        const gain = context.createGain();
-        oscillator.type = index === 1 ? "triangle" : "sine";
-        oscillator.frequency.value = frequency;
-        gain.gain.value = 0.28 / (index + 1);
-        oscillator.connect(gain);
-        gain.connect(master);
-        oscillator.start();
-        oscillatorsRef.current.push(oscillator);
-      });
+      audioRef.current.volume = 0.55;
+      await audioRef.current.play();
       setSoundPlaying(true);
     } catch {
       setSoundPlaying(false);
@@ -49,19 +27,15 @@ export default function OpeningBook({ children }) {
   };
 
   const stopOmSound = () => {
-    const context = audioRef.current;
-    if (!context || !masterRef.current) return;
-    masterRef.current.gain.cancelScheduledValues(context.currentTime);
-    masterRef.current.gain.setTargetAtTime(0.0001, context.currentTime, 0.18);
-    oscillatorsRef.current.forEach((oscillator) => oscillator.stop(context.currentTime + 0.8));
-    oscillatorsRef.current = [];
-    masterRef.current = null;
+    if (!audioRef.current) return;
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
     setSoundPlaying(false);
   };
 
   const openLanguage = (language) => {
     if (selected) return;
-    startOmSound();
+    void startOmSound();
     setSelected(language);
 
     window.setTimeout(() => {
@@ -79,6 +53,10 @@ export default function OpeningBook({ children }) {
 
   return (
     <div className={`divine-opening ${selected ? "is-opening" : ""}`}>
+      <audio ref={audioRef} loop preload="none" onError={() => setSoundPlaying(false)}>
+        <source src="/audio/om-namo.mp3" type="audio/mpeg" />
+        <source src="/audio/om%20namo.aac" type="audio/aac" />
+      </audio>
       <div className="flower-rain" aria-hidden="true">
         {petals.map((petal) => <span key={petal} style={{ "--i": petal }} />)}
       </div>
@@ -90,7 +68,7 @@ export default function OpeningBook({ children }) {
         <span className="divine-om">ॐ</span>
         <div className="deity-aura" />
         <div className="venkateswara-frame">
-          <img src="/img/venkateswara-temp.svg" alt="Temporary devotional illustration of Lord Venkateswara" onError={(event) => event.currentTarget.classList.add("deity-image-missing")} />
+          <img src="/img/venkateswara.webp" alt="Lord Venkateswara" onError={(event) => event.currentTarget.classList.add("deity-image-missing")} />
           <div className="deity-placeholder" aria-hidden="true"><span>ॐ</span></div>
         </div>
         <div className="deity-caption"><strong>ಶ್ರೀ ವೆಂಕಟೇಶ್ವರ ಸ್ವಾಮಿ</strong><small>Om Namo Venkatesaya</small></div>

@@ -1,0 +1,161 @@
+:root {
+  --wine: #7e1835;
+  --wine-dark: #541126;
+  --rose: #b74f69;
+  --gold: #b8874b;
+  --cream: #f7f0e5;
+  --ivory: #fffdf8;
+  --ink: #2f2023;
+  --muted: #76666a;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: var(--cream); color: var(--ink); font-family: "DM Sans", "Noto Sans Kannada", sans-serif; }
+button, a { font: inherit; }
+button { cursor: pointer; }
+img { display: block; max-width: 100%; }
+
+.landing { position: relative; isolation: isolate; min-height: 100svh; overflow: hidden; display: grid; place-items: center; padding: 28px 20px; background: radial-gradient(circle at 50% 35%, #fff 0, #f8f1e6 48%, #eadcc7 100%); }
+.landing::before, .landing::after { content: "❦"; position: absolute; color: rgba(126,24,53,.12); font-family: Georgia, serif; font-size: clamp(140px, 25vw, 280px); line-height: 1; }
+.landing::before { left: -80px; top: -50px; transform: rotate(-20deg); }
+.landing::after { right: -80px; bottom: -70px; transform: rotate(160deg); }
+.landing-orb { position: absolute; z-index: -1; width: 220px; aspect-ratio: 1; border-radius: 50%; filter: blur(18px); opacity: .28; }
+.landing-orb-one { background: #d9a6a8; left: -100px; top: 20%; }
+.landing-orb-two { background: #d8bd85; right: -120px; bottom: 12%; }
+.landing-content { width: min(460px, 100%); text-align: center; animation: landingIn .9s cubic-bezier(.2,.75,.25,1) both; }
+.landing-blessing { margin: 0 0 18px; color: var(--wine); font-size: 14px; letter-spacing: .08em; }
+.monogram { width: 112px; height: 112px; margin: 0 auto 22px; border: 1px solid rgba(126,24,53,.28); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--wine); box-shadow: 0 0 0 7px rgba(126,24,53,.035), inset 0 0 0 7px rgba(126,24,53,.035); font-family: "Cormorant Garamond", serif; font-size: 38px; }
+.monogram i { margin: 0 5px; font-size: 20px; color: var(--gold); }
+.eyebrow { margin: 0; color: var(--gold); text-transform: uppercase; letter-spacing: .18em; font-size: 11px; }
+.landing h1 { margin: 8px 0; color: var(--wine); font-family: "Cormorant Garamond", serif; font-size: clamp(48px, 12vw, 68px); line-height: .95; }
+.landing h1 em { font-size: .55em; color: var(--gold); }
+.landing-date { font-family: "Cormorant Garamond", serif; font-size: 20px; letter-spacing: .25em; }
+.landing-date span { color: var(--gold); }
+.language-question { margin: 34px 0 12px; }
+.language-question p { margin: 0 0 4px; font-weight: 600; }
+.language-question span { color: var(--muted); font-family: "Noto Sans Kannada", sans-serif; font-size: 14px; }
+.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.language-card { min-height: 82px; border: 1px solid rgba(126,24,53,.16); border-radius: 18px; background: rgba(255,255,255,.7); color: var(--wine); box-shadow: 0 12px 30px rgba(84,17,38,.06); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform .25s ease, background .25s ease, box-shadow .25s ease; animation: cardRise .65s var(--delay) both; backdrop-filter: blur(10px); }
+.language-card strong { font-family: "Cormorant Garamond", "Noto Sans Kannada", serif; font-size: 22px; }
+.language-card small { margin-top: 3px; color: var(--muted); }
+.language-card:hover { transform: translateY(-4px); background: var(--wine); color: #fff; box-shadow: 0 16px 35px rgba(126,24,53,.2); }
+.language-card:hover small { color: rgba(255,255,255,.75); }
+
+.invitation { width: min(760px, calc(100% - 24px)); margin: 12px auto 40px; padding-bottom: 8px; }
+.back { position: fixed; z-index: 30; top: max(12px, env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left)); border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: 10px 15px; background: rgba(255,253,248,.88); color: var(--wine); box-shadow: 0 8px 24px rgba(84,17,38,.12); backdrop-filter: blur(12px); transition: transform .2s ease; }
+.back:hover { transform: translateX(-3px); }
+
+.hero { margin: 0; }
+.hero-frame { position: relative; min-height: min(720px, 92svh); overflow: hidden; border-radius: 6px 6px 28px 28px; background: var(--wine-dark); box-shadow: 0 22px 55px rgba(84,17,38,.16); }
+.hero-image { width: 100%; height: min(720px, 92svh); object-fit: cover; animation: slowZoom 14s ease-in-out infinite alternate; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(35,10,17,.08), rgba(35,10,17,.18) 45%, rgba(35,10,17,.78)); }
+.hero-frame.image-unavailable::before { content: "✦"; position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255,255,255,.24); font-size: 80px; }
+.hero-content { position: absolute; inset: auto 20px 45px; text-align: center; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,.25); }
+.hero-blessing { margin: 0 0 14px; color: #f4d39c; font-family: "Noto Sans Kannada", serif; font-size: 13px; }
+.hero-eyebrow { margin: 0; text-transform: uppercase; letter-spacing: .18em; font-size: 10px; }
+.hero h1 { margin: 12px 0 4px; font-family: "Cormorant Garamond", "Noto Sans Kannada", serif; font-size: clamp(48px, 11vw, 78px); line-height: .86; }
+.hero h1 span { display: inline-block; margin: 0 9px; color: #e0bc82; font-size: .42em; vertical-align: middle; }
+.hero-subtitle { margin: 12px 0 5px; font-family: "Cormorant Garamond", serif; font-size: 20px; font-style: italic; }
+.hero-divider, .footer-divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px auto; }
+.hero-divider i, .footer-divider i { width: 55px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7)); }
+.hero-divider i:last-child, .footer-divider i:last-child { transform: rotate(180deg); }
+.hero-divider b { color: #e0bc82; font-size: 9px; }
+.hero-date { margin: 0; font-family: "Cormorant Garamond", "Noto Sans Kannada", serif; font-size: clamp(18px, 5vw, 24px); }
+.hero-time { margin: 7px 0 0; font-size: 12px; letter-spacing: .12em; }
+
+.section { margin: 76px 12px; }
+.section-heading { margin-bottom: 24px; text-align: center; }
+.section-heading span { color: var(--gold); font-family: "Cormorant Garamond", serif; font-size: 13px; letter-spacing: .15em; }
+.section-heading p { margin: 4px 0 2px; color: var(--muted); text-transform: uppercase; letter-spacing: .18em; font-size: 10px; }
+.section-heading h2 { margin: 0; color: var(--wine); font-family: "Cormorant Garamond", "Noto Sans Kannada", serif; font-size: clamp(38px, 9vw, 56px); line-height: 1; }
+.two-col { display: grid; gap: 14px; }
+.couple-card { position: relative; overflow: hidden; min-height: 230px; border: 1px solid rgba(184,135,75,.18); border-radius: 18px; padding: 34px 24px 28px; background: rgba(255,253,248,.78); text-align: center; box-shadow: 0 14px 35px rgba(84,17,38,.055); }
+.couple-card::before { content: ""; position: absolute; width: 130px; height: 130px; border: 1px solid rgba(184,135,75,.12); border-radius: 50%; left: -72px; bottom: -78px; }
+.couple-card-mark { position: absolute; right: 16px; top: 12px; color: rgba(184,135,75,.35); font-size: 28px; }
+.tag { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: 10px; }
+.couple-card h3 { margin: 8px 0 5px; color: var(--wine); font-family: "Cormorant Garamond", "Noto Sans Kannada", serif; font-size: 31px; }
+.couple-card p { margin: 6px 0; font-size: 13px; }
+.couple-job { color: var(--muted); }
+.couple-rule { width: 38px; height: 1px; margin: 14px auto; background: var(--gold); }
+.couple-place { color: var(--gold); }
+
+.countdown-section { border-radius: 24px; padding: 42px 12px; background: var(--wine); }
+.countdown-section .section-heading span, .countdown-section .section-heading p { color: #dabf96; }
+.countdown-section .section-heading h2 { color: #fff; }
+.countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.unit { min-width: 0; border-left: 1px solid rgba(255,255,255,.12); text-align: center; }
+.unit:first-child { border-left: 0; }
+.unit b { display: block; color: #fff; font-family: "Cormorant Garamond", serif; font-size: clamp(29px, 9vw, 48px); line-height: 1; }
+.unit span { display: block; margin-top: 8px; color: rgba(255,255,255,.66); font-size: clamp(9px, 2vw, 12px); }
+
+.events-list { display: grid; gap: 18px; }
+.event { overflow: hidden; border-radius: 20px; background: var(--ivory); box-shadow: 0 16px 40px rgba(84,17,38,.08); }
+.city { margin: 0; border-bottom: 1px solid rgba(184,135,75,.12); padding: 15px 18px; color: var(--gold); text-transform: uppercase; letter-spacing: .14em; font-size: 11px; }
+.city span { margin-right: 7px; font-size: 8px; }
+.event-image-wrap { height: 260px; overflow: hidden; background: #d9cbb4; }
+.event-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.event:hover .event-image-wrap img { transform: scale(1.035); }
+.event-image-wrap.image-unavailable { display: grid; place-items: center; }
+.event-image-wrap.image-unavailable::after { content: "✦"; color: rgba(126,24,53,.3); font-size: 48px; }
+.event-body { position: relative; padding: 22px 20px 24px; }
+.event-number { position: absolute; right: 18px; top: 18px; color: rgba(184,135,75,.28); font-family: "Cormorant Garamond", serif; font-size: 32px; }
+.event h3 { margin: 0 45px 18px 0; color: var(--wine); font-family: "Cormorant Garamond", "Noto Sans Kannada", serif; font-size: 34px; }
+.event-details { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.event-details p { margin: 0; font-size: 14px; }
+.event-details small { display: block; margin-bottom: 3px; color: var(--gold); text-transform: uppercase; letter-spacing: .1em; font-size: 9px; }
+.note { margin: 16px 0 !important; border-left: 2px solid var(--gold); padding-left: 10px; color: var(--wine); font-weight: 600; }
+.map-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; border-bottom: 1px solid rgba(126,24,53,.3); padding-bottom: 4px; color: var(--wine); text-decoration: none; font-size: 13px; font-weight: 600; }
+.map-link span { color: var(--gold); font-size: 18px; }
+
+.section-intro { margin: -12px 0 20px; color: var(--muted); text-align: center; font-size: 13px; }
+.contacts-list { display: grid; gap: 10px; }
+.contact { border: 1px solid rgba(184,135,75,.15); border-radius: 16px; padding: 12px; background: var(--ivory); box-shadow: 0 8px 24px rgba(84,17,38,.04); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.contact-person { min-width: 0; display: flex; align-items: center; gap: 10px; text-align: left; }
+.contact-avatar { flex: 0 0 42px; height: 42px; border-radius: 50%; background: var(--cream); color: var(--wine); display: grid; place-items: center; font-family: "Cormorant Garamond", serif; font-size: 21px; }
+.contact-person strong, .contact-person small { display: block; }
+.contact-person strong { font-size: 13px; }
+.contact-person small { margin-top: 3px; color: var(--muted); }
+.contact-actions { display: flex; gap: 6px; }
+.btn { min-height: 38px; border: 1px solid var(--wine); border-radius: 999px; padding: 8px 10px; background: transparent; color: var(--wine); text-decoration: none; font-size: 12px; transition: all .2s ease; }
+.call-button { display: inline-flex; align-items: center; gap: 5px; }
+.btn:hover { background: var(--wine); color: #fff; }
+
+.footer { margin-top: 86px; border-radius: 28px 28px 8px 8px; padding: 54px 20px 38px; background: var(--wine-dark); color: #fff; text-align: center; }
+.footer-flourish { color: #dbbb82; font-size: 38px; }
+.footer-kicker { margin: 12px 0 8px; color: #ddbF91; font-family: "Cormorant Garamond", serif; font-size: 28px; }
+.footer-invite { max-width: 520px; margin: 0 auto; color: rgba(255,255,255,.78); font-size: 13px; line-height: 1.75; }
+.footer-divider { margin: 22px auto; }
+.footer-divider i { background: linear-gradient(90deg, transparent, rgba(219,187,130,.7)); }
+.footer-divider b { color: #dbbb82; }
+.hosts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; }
+.hosts span { font-family: "Cormorant Garamond", "Noto Sans Kannada", serif; font-size: 20px; }
+.footer .small { margin-top: 18px; color: rgba(255,255,255,.48); }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .75s ease, transform .75s cubic-bezier(.2,.75,.25,1); transition-delay: var(--delay, 0ms); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes landingIn { from { opacity: 0; transform: scale(.96) translateY(15px); } to { opacity: 1; transform: none; } }
+@keyframes cardRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
+
+/* Enhanced invitation sections */
+.wedding-actions { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.action-card { min-height:118px; border:1px solid rgba(184,135,75,.18); border-radius:18px; padding:14px 8px; background:var(--ivory); color:var(--ink); box-shadow:0 10px 28px rgba(84,17,38,.05); text-decoration:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; transition:.25s ease; }
+.action-card:hover { transform:translateY(-4px); border-color:var(--gold); background:#fff; }
+.action-card > span { width:38px; height:38px; border-radius:50%; background:var(--cream); color:var(--wine); display:grid; place-items:center; font-size:19px; }
+.action-card small,.action-card strong { display:block; }.action-card small { color:var(--muted); font-size:9px; }.action-card strong { margin-top:3px; color:var(--wine); font-size:12px; }
+.gallery-grid { display:grid; grid-template-columns:repeat(2,1fr); grid-auto-rows:170px; gap:10px; }
+.gallery-item { position:relative; overflow:hidden; border:0; border-radius:16px; padding:0; background:#d9cbb4; }
+.gallery-item-1,.gallery-item-4 { grid-row:span 2; }.gallery-item img { width:100%; height:100%; object-fit:cover; transition:.65s ease; }.gallery-item:hover img { transform:scale(1.06); }
+.gallery-item > span { position:absolute; right:10px; bottom:10px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.88); color:var(--wine); display:grid; place-items:center; opacity:0; transition:.25s ease; }.gallery-item:hover > span { opacity:1; }
+.gallery-placeholder::after { content:"✦"; position:absolute; inset:0; display:grid; place-items:center; color:rgba(126,24,53,.28); font-size:38px; }.gallery-placeholder img { opacity:0; }
+.lightbox { position:fixed; z-index:100; inset:0; padding:50px 16px 16px; background:rgba(28,10,16,.92); backdrop-filter:blur(12px); display:grid; place-items:center; animation:landingIn .25s ease both; }
+.lightbox img { width:auto; max-width:100%; max-height:82svh; object-fit:contain; border-radius:12px; }.lightbox button { position:absolute; z-index:101; top:max(12px,env(safe-area-inset-top)); right:14px; width:42px; height:42px; border:1px solid rgba(255,255,255,.5); border-radius:50%; background:rgba(255,255,255,.12); color:#fff; font-size:26px; }
+.rsvp-section { border-radius:24px; padding:42px 18px; background:rgba(255,253,248,.75); box-shadow:0 16px 40px rgba(84,17,38,.06); }.rsvp-form { display:grid; grid-template-columns:1fr 1fr; gap:14px; }.rsvp-form label { display:grid; gap:7px; text-align:left; }.rsvp-form label > span { color:var(--wine); font-size:12px; font-weight:600; }
+.rsvp-form input,.rsvp-form select,.rsvp-form textarea { width:100%; border:1px solid rgba(126,24,53,.15); border-radius:12px; padding:12px 13px; outline:none; background:#fff; color:var(--ink); font:inherit; transition:.2s ease; }.rsvp-form input:focus,.rsvp-form select:focus,.rsvp-form textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(184,135,75,.12); }.rsvp-message { grid-column:1/-1; }.rsvp-form textarea { resize:vertical; }
+.rsvp-submit { grid-column:1/-1; min-height:48px; border:0; border-radius:999px; padding:12px 20px; background:var(--wine); color:#fff; display:flex; align-items:center; justify-content:center; gap:10px; }.rsvp-submit:hover { transform:translateY(-2px); background:var(--wine-dark); }.rsvp-submit span { color:#e5c38b; font-size:18px; }
+.rsvp-success { border:1px solid rgba(184,135,75,.18); border-radius:18px; padding:35px 18px; text-align:center; }.rsvp-success > span { width:48px; height:48px; margin:0 auto; border-radius:50%; background:var(--wine); color:#fff; display:grid; place-items:center; }.rsvp-success h3 { margin:12px 0 5px; color:var(--wine); font-family:"Cormorant Garamond","Noto Sans Kannada",serif; font-size:30px; }.rsvp-success p { color:var(--muted); font-size:13px; }
+.music-player { position:fixed; z-index:40; right:max(12px,env(safe-area-inset-right)); bottom:max(12px,env(safe-area-inset-bottom)); width:48px; height:48px; border:1px solid rgba(255,255,255,.45); border-radius:999px; padding:0; background:var(--wine); color:#fff; box-shadow:0 10px 30px rgba(84,17,38,.22); display:grid; place-items:center; }.music-player i { display:none; }.music-player.playing::after { content:""; position:absolute; inset:5px; border:1px solid rgba(255,255,255,.38); border-radius:50%; animation:musicPulse 1.5s ease-out infinite; }@keyframes musicPulse { from{transform:scale(.75);opacity:1}to{transform:scale(1.3);opacity:0} }
+@media (min-width:600px){.gallery-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:230px}.gallery-item-1,.gallery-item-4{grid-row:span 1}.gallery-item-2,.gallery-item-3{transform:translateY(18px)}}
+@media (max-width:420px){.wedding-actions{gap:6px}.action-card{min-height:108px;padding-inline:4px}.action-card strong{font-size:10px}.gallery-grid{grid-auto-rows:145px;gap:7px}.rsvp-form{grid-template-columns:1fr}.rsvp-message,.rsvp-submit{grid-column:1}}

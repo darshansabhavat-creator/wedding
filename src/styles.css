@@ -151,7 +151,11 @@ img { display: block; max-width: 100%; }
 .gallery-item > span { position:absolute; right:10px; bottom:10px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.88); color:var(--wine); display:grid; place-items:center; opacity:0; transition:.25s ease; }.gallery-item:hover > span { opacity:1; }
 .gallery-placeholder::after { content:"✦"; position:absolute; inset:0; display:grid; place-items:center; color:rgba(126,24,53,.28); font-size:38px; }.gallery-placeholder img { opacity:0; }
 .lightbox { position:fixed; z-index:100; inset:0; padding:50px 16px 16px; background:rgba(28,10,16,.92); backdrop-filter:blur(12px); display:grid; place-items:center; animation:landingIn .25s ease both; }
-.lightbox img { width:auto; max-width:100%; max-height:82svh; object-fit:contain; border-radius:12px; }.lightbox button { position:absolute; z-index:101; top:max(12px,env(safe-area-inset-top)); right:14px; width:42px; height:42px; border:1px solid rgba(255,255,255,.5); border-radius:50%; background:rgba(255,255,255,.12); color:#fff; font-size:26px; }
+.lightbox img { width:auto; max-width:100%; max-height:82svh; object-fit:contain; border-radius:12px; animation:lightboxPhotoIn .36s cubic-bezier(.2,.75,.25,1) both; }.lightbox button { position:absolute; z-index:101; top:max(12px,env(safe-area-inset-top)); right:14px; width:42px; height:42px; border:1px solid rgba(255,255,255,.5); border-radius:50%; background:rgba(255,255,255,.12); color:#fff; font-size:26px; }
+.lightbox .lightbox-previous,.lightbox .lightbox-next { top:50%; right:auto; width:48px; height:56px; transform:translateY(-50%); border-radius:999px; background:rgba(255,255,255,.13); font-size:38px; line-height:1; backdrop-filter:blur(8px); transition:background .2s ease,transform .2s ease; }
+.lightbox .lightbox-previous { left:16px; }
+.lightbox .lightbox-next { right:16px; }
+.lightbox .lightbox-previous:hover,.lightbox .lightbox-next:hover { background:rgba(255,255,255,.26); transform:translateY(-50%) scale(1.05); }
 .rsvp-section { border-radius:24px; padding:42px 18px; background:rgba(255,253,248,.75); box-shadow:0 16px 40px rgba(84,17,38,.06); }.rsvp-form { display:grid; grid-template-columns:1fr 1fr; gap:14px; }.rsvp-form label { display:grid; gap:7px; text-align:left; }.rsvp-form label > span { color:var(--wine); font-size:12px; font-weight:600; }
 .rsvp-form input,.rsvp-form select,.rsvp-form textarea { width:100%; border:1px solid rgba(126,24,53,.15); border-radius:12px; padding:12px 13px; outline:none; background:#fff; color:var(--ink); font:inherit; transition:.2s ease; }.rsvp-form input:focus,.rsvp-form select:focus,.rsvp-form textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(184,135,75,.12); }.rsvp-message { grid-column:1/-1; }.rsvp-form textarea { resize:vertical; }
 .rsvp-submit { grid-column:1/-1; min-height:48px; border:0; border-radius:999px; padding:12px 20px; background:var(--wine); color:#fff; display:flex; align-items:center; justify-content:center; gap:10px; }.rsvp-submit:hover { transform:translateY(-2px); background:var(--wine-dark); }.rsvp-submit span { color:#e5c38b; font-size:18px; }
@@ -195,7 +199,12 @@ img { display: block; max-width: 100%; }
 @keyframes stageReveal { from { opacity: 0 } to { opacity: 1 } }
 @keyframes leftBookSpread { from { transform: translateX(8%) scale(.94); opacity: 0 } to { transform: translateX(0) scale(1); opacity: 1 } }
 @keyframes rightBookSpread { from { transform: translateX(-8%) scale(.94); opacity: 0 } to { transform: translateX(0) scale(1); opacity: 1 } }
-@keyframes coverPageTurn { 0% { transform: rotateY(0deg) translateZ(0); } 65% { filter: brightness(.92); } 100% { transform: rotateY(-178deg) translateZ(2px); filter: brightness(.7); } }
+@keyframes coverPageTurn {
+  0% { transform: rotateY(0deg) translateZ(0) rotateZ(0); filter: brightness(1); box-shadow: inset 0 0 0 11px rgba(255,220,149,.08),18px 28px 60px rgba(25,5,10,.48); }
+  38% { transform: rotateY(-58deg) translateZ(22px) rotateZ(-1deg); filter: brightness(1.05); box-shadow: inset 0 0 0 11px rgba(255,220,149,.08),28px 28px 55px rgba(25,5,10,.36); }
+  72% { transform: rotateY(-145deg) translateZ(12px) rotateZ(.5deg); filter: brightness(.9); }
+  100% { transform: rotateY(-178deg) translateZ(2px) rotateZ(0); filter: brightness(.7); }
+}
 
 @media (max-width: 680px) {
   .full-book-page, .turning-cover { width: 48vw; height: min(68svh, 560px); margin-top: calc(min(68svh, 560px) / -2); }.full-book-left { left: 2vw }.full-book-right, .turning-cover { right: 2vw }
@@ -265,7 +274,7 @@ img { display: block; max-width: 100%; }
 .deity-caption strong { color: #fff4dc; font-family: "Noto Sans Kannada",serif; font-size: clamp(15px,2vw,22px); }
 .deity-caption small { margin-top: 5px; color: #edcf91; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
 .flower-rain { position: absolute; z-index: 8; inset: 0; overflow: hidden; pointer-events: none; }
-.flower-rain span { position: absolute; left: calc(var(--i) * 5.1vw); top: -30px; width: 12px; height: 18px; border-radius: 70% 20% 70% 20%; background: linear-gradient(135deg,#fff4d8,#ef9a9e 45%,#e3ba55); opacity: .8; animation: flowerFall calc(5.8s + var(--i)*.12s) linear infinite; animation-delay: calc(var(--i)*-.37s); }
+.flower-rain span { position: absolute; left: calc(var(--i) * 5.1vw); top: -30px; width: 12px; height: 18px; border-radius: 70% 20% 70% 20%; background: linear-gradient(135deg,#fff4d8,#ef9a9e 45%,#e3ba55); opacity: .42; animation: flowerFall calc(7s + var(--i)*.16s) linear infinite; animation-delay: calc(var(--i)*-.37s); }
 .flower-rain span:nth-child(3n) { background: linear-gradient(135deg,#fff,#f4c8d0); }
 .flower-rain span:nth-child(4n) { background: linear-gradient(135deg,#ffe26b,#d78a3d); }
 .flower-garland { position: absolute; z-index: 9; top: -20px; left: -20px; right: -20px; height: 78px; display: flex; justify-content: space-around; transform: rotate(-2deg); pointer-events: none; }
@@ -304,6 +313,11 @@ img { display: block; max-width: 100%; }
 .divine-opening.is-opening .full-book-left,.divine-opening.is-opening .full-book-right { animation-duration: 1.45s; }
 .divine-opening.is-opening .turning-cover { animation-duration: 2s; animation-delay: .18s; }
 @keyframes deityFlowerShower { 0% { opacity: 0; transform: translate3d(0,-12px,0) rotate(0deg); } 12% { opacity: .95; } 84% { opacity: .85; } 100% { opacity: 0; transform: translate3d(18px,calc(100% + 28px),0) rotate(390deg); } }
+@keyframes flowerFall { 0% { opacity: 0; transform: translate3d(0,-24px,0) rotate(0deg); } 14% { opacity: .34; } 82% { opacity: .3; } 100% { opacity: 0; transform: translate3d(28px,110svh,0) rotate(420deg); } }
+@keyframes lightboxPhotoIn { from { opacity: 0; transform: scale(.965); } to { opacity: 1; transform: scale(1); } }
+@keyframes countdownTick { from { opacity: .35; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+.count-value { animation: countdownTick .28s cubic-bezier(.2,.75,.25,1) both; }
+.gallery-item.reveal,.events-list .event.reveal,.couple-section .couple-card.reveal { transition-delay: var(--delay,0ms); }
 @media (max-width: 680px) {
   .divine-opening { grid-template-columns: minmax(0,1fr); grid-template-rows: 44svh 56svh; align-items: stretch; }
   .divine-deity { height: 44svh; padding: 30px 12px 18px; }
@@ -335,5 +349,6 @@ img { display: block; max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .flower-rain span,.flower-shower span,.flower-garland i,.divine-om,.deity-aura,.divine-deity,.venkateswara-frame img,.deity-caption,.language-books,.invitation-book { animation: none !important; }
+  .count-value,.lightbox img { animation: none !important; }
   .invitation-book,.book-cover-face { transition: none !important; }
 }

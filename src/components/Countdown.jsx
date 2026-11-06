@@ -27,7 +27,7 @@ export default function Countdown({ t }) {
       <div className="countdown">
         {values.map((value, index) => (
           <div key={index} className="unit">
-            <b>{String(value).padStart(2, "0")}</b>
+            <b key={`${index}-${value}`} className="count-value">{String(value).padStart(2, "0")}</b>
             <span>{t.units[index]}</span>
           </div>
         ))}
